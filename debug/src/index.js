@@ -6,16 +6,7 @@
  * @Last Modified Time: 2019-02-15 11:30:26
  */
 
-var stream=require('stream');
-var fs=require('fs');
-var rawStdout=process.stdout,//先拿到原来的stdout
-  newStdout=new stream.PassThrough();//创建一个passthrough流，这是一种特殊的Transform流，会直接把写入的数据吐出来
 
-process.__defineGetter__('stdout',function(){//重新定义process.stdout的Getter
-  return newStdout;//返回我们的passthrough流
-});
-
-process.stdin.pipe(fs.createWriteStream('./test.text'))
 
 const debug = require('debug')
 debug.enable('app:*');
