@@ -1,0 +1,8 @@
+流转存服务实现的第一步即是捕获下载到的内容。Node.js中的stream模块可以很方便的进行文件的处理，
+Readable的Stream在接收到数据之后，会不断的触发data事件。 通过监听Readable的Stream的data
+事件即可准确获取到每一次通过Stream进行传输的数据。
+
+作者：andycall
+链接：https://www.jianshu.com/p/ef663e80148c
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
