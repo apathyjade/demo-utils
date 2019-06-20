@@ -6,9 +6,11 @@
  * @Last Modified Time: 2019-06-11 18:00:36
  */
 
-const {createStore, compose} = require('redux') 
+const {createStore, compose} = require('redux')
+const reducer = require('./common/reducer.js')
 
 let noticeEnhancer1 = enhancer => createStore => (counter, defState) => {
+  console.log(typeof enhancer)
   let store = createStore(counter, defState, enhancer)
   let subscribe = (...arg) => {
     const res = store.subscribe(...arg);
@@ -19,6 +21,7 @@ let noticeEnhancer1 = enhancer => createStore => (counter, defState) => {
 }
 
 let noticeEnhancer2 = enhancer => createStore => (counter, defState) => {
+  console.log(typeof enhancer)
   let store = createStore(counter, defState, enhancer)
   let subscribe = (...arg) => {
     const res = store.subscribe(...arg);
@@ -29,6 +32,7 @@ let noticeEnhancer2 = enhancer => createStore => (counter, defState) => {
 }
 
 let noticeEnhancer3 = enhancer => createStore => (counter, defState) => {
+  console.log(typeof enhancer)
   let store = createStore(counter, defState, enhancer)
   let subscribe = (...arg) => {
     const res = store.subscribe(...arg);
@@ -38,24 +42,15 @@ let noticeEnhancer3 = enhancer => createStore => (counter, defState) => {
   return {...store, subscribe}
 }
 
-const normalEnhancer = noticeEnhancer3(noticeEnhancer2(noticeEnhancer1()))
-const composeEnhancer = compose(noticeEnhancer3(), noticeEnhancer2(), noticeEnhancer1())
+const Enhancer1 = noticeEnhancer3(noticeEnhancer2(noticeEnhancer1()))
 
+const Enhancer2 = compose(noticeEnhancer3, noticeEnhancer2, noticeEnhancer1)()
 
-function reducer(state = {}, action) {
-  switch (action.type) {
-    case 'CHAGE_NAME':
-      state.name = `shuidi-${action.data}`
-      return state
-    default:
-      return state
-  }
-}
+const Enhancer3 = compose(noticeEnhancer3(), noticeEnhancer2(), noticeEnhancer1())
 
 let store = createStore(reducer, {
   name: 'shuidi',
-  age: 3,
-  address: 'beijing, chaoyang'
-}, composeEnhancer)
+  age: 3
+}, Enhancer1)
 store.subscribe(() => {})
 store.dispatch({ type: 'CHAGE_NAME', data: 'chou' })

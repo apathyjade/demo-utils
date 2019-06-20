@@ -6,21 +6,8 @@
  * @Last Modified Time: 2019-06-11 18:00:36
  */
 
-const {createStore, bindActionCreators} = require('redux') 
-
-
-function reducer(state = {name: 'shuidi', age: 3}, action) {
-  switch (action.type) {
-    case 'CHAGE_NAME':
-      state.name = `shuidi-${action.data}`
-      return state
-    case 'GROW_UP':
-        state.age++
-      return state
-    default:
-      return state
-  }
-}
+const {createStore, bindActionCreators} = require('redux')
+const reducer = require('./common/reducer.js')
 
 let store = createStore(reducer)
 

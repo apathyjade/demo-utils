@@ -19,7 +19,7 @@ function counter(state = {}, action) {
       return state
     case __DO_NOT_USE__ActionTypes.INIT:
       state.init = true
-      console.log('emit INIT')
+      // console.log('emit INIT')
       return state
     default:
       return state
@@ -32,7 +32,7 @@ function repReducer(state = {}, action) {
       state.name = `repReducer shuidi${action.data}`
       return state
       case __DO_NOT_USE__ActionTypes.REPLACE:
-      console.log('emit REPLACE')
+      // console.log('emit REPLACE')
       return state
     default:
       return state

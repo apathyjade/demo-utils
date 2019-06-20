@@ -1,23 +1,32 @@
-# redux使用说明
+# redux
 
-## createStore
+## redux使用说明
 
-[基础用法](./index.js)
+### createStore
+
+[基础用法](./base.js)
 [enhancer](./enhancer.js)
 [replaceReducer](./replaceReducer.js)
 
-## combineReducers
+[createStore source](../sourceSimple/createStore.js)
+
+### combineReducers
 
 [combineReducers](./combineReducers.js) [source](../sourceSimple/combineReducers.js)
 
-## compose
+### compose
 
 [compose](./compose.js) [source](../sourceSimple/compose.js)
 
-## bindActionCreators
+### bindActionCreators
 
-[compose](./bindActionCreators.js) [source](../sourceSimple/bindActionCreators.js)
+[bindActionCreators](./bindActionCreators.js) [source](../sourceSimple/bindActionCreators.js)
 
-## applyMiddleware
+### applyMiddleware
 
-[compose](./applyMiddleware.js) [source](../sourceSimple/applyMiddleware.js)
+[applyMiddleware](./applyMiddleware.js) [source](../sourceSimple/applyMiddleware.js)
+
+## 对比其他框架
+
+[flux](./contrast/flux.js)
+[mobX](./contrast/mobX.js)

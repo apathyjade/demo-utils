@@ -1,5 +1,5 @@
 {
-  "name": "demo-redux",
+  "name": "demo-consul",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "flux": "^3.1.3",
-    "mobx": "^5.10.1",
-    "react": "^16.8.6",
-    "redux": "^4.0.1"
+    "consul": "^0.34.1"
   }
 }

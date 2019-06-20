@@ -11,30 +11,17 @@
  * combineReducers
  */
 
-const {createStore, combineReducers} = require('redux') 
+const {createStore, combineReducers} = require('redux')
+const reducerBase = require('./common/reducer.js')
 
-function reducerBase(state = {name: 'huzhu', age: 3}, action) {
+function reducerState(state = {stateDirty: false}, action) {
   switch (action.type) {
-    case 'CHAGE_NAME':
-      state.name = `shuidi${action.data}`
-      return state
-    case 'GROW_UP':
-        state.age++
-      return state
-    default:
-      return state
-  }
-}
-function reducerState(state = {stateInit: false, stateDirty: false}, action) {
-  switch (action.type) {
-    case 'STATE_INIT':
-      typeof action.data === 'boolean' && (state.stateInit = action.data)
-      return state
     case 'STATE_DIRTY':
-      typeof action.data === 'boolean' && (state.stateDirty = action.data)
-      return state
+      return Object.assign({}, state, {
+        stateDirty: typeof action.data === 'boolean' ? action.data : undefined
+      })
     default:
-      return state
+      return Object.assign({}, state)
   }
 }
 const reducers = combineReducers({reducerBase, reducerState})
@@ -46,6 +33,5 @@ store.subscribe(() => {
 })
 
 store.dispatch({ type: 'CHAGE_NAME', data: 'huzhu' })
-store.dispatch({ type: 'GROW_UP', data: 'huzhu' })
-store.dispatch({ type: 'STATE_INIT', data: 'huzhu' })
-store.dispatch({ type: 'STATE_DIRTY', data: 'huzhu' })
+store.dispatch({ type: 'GROW_UP' })
+store.dispatch({ type: 'STATE_DIRTY', data: true })
