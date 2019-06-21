@@ -9,7 +9,6 @@
 var consul = require('consul')({
   host: 'consul.zelda.shuiditech.com',
   port: '8500',
-
 });
 consul.catalog.service.list(function(err, result) {
   if (err) throw err;
