@@ -42,15 +42,16 @@ let noticeEnhancer3 = enhancer => createStore => (counter, defState) => {
   return {...store, subscribe}
 }
 
-const Enhancer1 = noticeEnhancer3(noticeEnhancer2(noticeEnhancer1()))
-
+const Enhancer1 = ((...args) => noticeEnhancer3(noticeEnhancer2(noticeEnhancer1(...args))))()
 const Enhancer2 = compose(noticeEnhancer3, noticeEnhancer2, noticeEnhancer1)()
 
-const Enhancer3 = compose(noticeEnhancer3(), noticeEnhancer2(), noticeEnhancer1())
+
+const Enhancer3 = (...arg) => noticeEnhancer3()(noticeEnhancer2()(noticeEnhancer1()(...arg)))
+const Enhancer4 = compose(noticeEnhancer3(), noticeEnhancer2(), noticeEnhancer1())
 
 let store = createStore(reducer, {
   name: 'shuidi',
   age: 3
-}, Enhancer1)
+}, Enhancer3)
 store.subscribe(() => {})
 store.dispatch({ type: 'CHAGE_NAME', data: 'chou' })

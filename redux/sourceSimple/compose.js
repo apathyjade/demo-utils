@@ -17,3 +17,9 @@ export default function compose(...funcs) {
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
+
+// [fn1, fn2, fn3] => (...args) => fn1(fn2(fn3(...args)))
+
+let b = (...args) => {
+  return a(b(...args))
+}

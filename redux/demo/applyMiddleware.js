@@ -13,10 +13,11 @@ let noticeEnhancer1 =  ({dispatch, getState}) => next => action => {
   console.log(`noticeEnhancer1`);
   return next(action)
 }
-let noticeEnhancer2 =  ({dispatch, getState}) => next => action => {
+let noticeEnhancer2 =  ({dispatch, getState}) => (console.log(1), next => (console.log(2), action => {
   console.log(`noticeEnhancer2`);
+  console.log(action.type)
   return next(action)
-}
+}))
 
 let store = createStore(reducer, applyMiddleware(noticeEnhancer1, noticeEnhancer2))
 
@@ -29,11 +30,11 @@ let actions = {
   }
 }
 store.subscribe(() => {
-  console.log(JSON.stringify(store.getState()))
+  // console.log(JSON.stringify(store.getState()))
 })
 
 let methods = bindActionCreators(actions, store.dispatch)
 
-methods.changeName('china')
-methods.growUp()
+// methods.changeName('china')
+// methods.growUp()
 

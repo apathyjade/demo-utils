@@ -17,6 +17,31 @@ export default function applyMiddleware(...middlewares) {
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
     dispatch = compose(...chain)(store.dispatch)
 
+    // ({dispatch, getState}) => next => action => {
+    //   console.log(`noticeEnhancer2`);
+    //   return next(action)
+    // }
+
+    // next => action => {
+    //   console.log(`noticeEnhancer2`);
+    //   return next(action)
+    // }
+
+    // ((...arg) => n1(n2(n3(...arg))))(dispatch)
+
+    // dispatch => d => {
+    //   return action => {
+    //     console.log(`noticeEnhancer2`);
+    //     return (action => {
+    //       console.log(`noticeEnhancer2`);
+    //       return (action => {
+    //         console.log(`noticeEnhancer2`);
+    //         return d(action)
+    //       })(action)
+    //     })(action)
+    //   }
+    // }
+
     return {
       ...store,
       dispatch
