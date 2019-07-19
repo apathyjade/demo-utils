@@ -23,9 +23,13 @@ export default function createStore(reducer, preloadedState, enhancer) {
   let currentReducer = reducer
   let currentState = preloadedState
   let currentListeners = []
+  // 缓冲对象 在每次 绑定和解绑事件时 浅拷贝currentListeners
+  // 执行绑定监听事件千 把 nextListeners 赋值给 currentListeners
   let nextListeners = currentListeners
+  // 记录 Dispatching 状态， 确保一个同步状态 可以保证 reducer 里面不能是有store的一些实例方法
   let isDispatching = false
 
+  // 浅拷贝currentListeners 确保 nextListeners可被修改
   function ensureCanMutateNextListeners() {
     if (nextListeners === currentListeners) {
       nextListeners = currentListeners.slice()

@@ -23,6 +23,7 @@ store.subscribe(() => {
   console.log(JSON.stringify(store.getState()))
 })
 
+
 let methods = bindActionCreators(actions, store.dispatch)
 
 methods.changeName('china')

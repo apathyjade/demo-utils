@@ -42,16 +42,25 @@ let noticeEnhancer3 = enhancer => createStore => (counter, defState) => {
   return {...store, subscribe}
 }
 
+// noticeEnhancer() 返回 Enhancer 作为下一个 Enhancer createStore 调用参数
 const Enhancer1 = ((...args) => noticeEnhancer3(noticeEnhancer2(noticeEnhancer1(...args))))()
 const Enhancer2 = compose(noticeEnhancer3, noticeEnhancer2, noticeEnhancer1)()
 
 
+// noticeEnhancer() 返回 Enhancer 执行 Enhancer 返回 createStore createStore嵌套执行
 const Enhancer3 = (...arg) => noticeEnhancer3()(noticeEnhancer2()(noticeEnhancer1()(...arg)))
 const Enhancer4 = compose(noticeEnhancer3(), noticeEnhancer2(), noticeEnhancer1())
+
+// enhancer = createStore => (counter, defState) => {
+//   ...
+//   let store = createStore(counter, defState, enhancer)
+//   ...
+//   return store
+// }
 
 let store = createStore(reducer, {
   name: 'shuidi',
   age: 3
-}, Enhancer3)
+}, Enhancer1)
 store.subscribe(() => {})
 store.dispatch({ type: 'CHAGE_NAME', data: 'chou' })

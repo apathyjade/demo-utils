@@ -18,6 +18,7 @@ function combineReducers(reducers) {
     }
 
     var hasChanged = false;
+    
     var nextState = {};
 
     for (var _i = 0; _i < finalReducerKeys.length; _i++) {
@@ -29,7 +30,7 @@ function combineReducers(reducers) {
       nextState[_key] = nextStateForKey;
       hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
     }
-
+    // 如果state有改动 返回新的对象
     return hasChanged ? nextState : state;
   };
 }

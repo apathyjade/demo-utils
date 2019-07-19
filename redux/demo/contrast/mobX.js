@@ -11,7 +11,7 @@ const appState = observable({
   name: 'shuidi',
   age: 3,
   get willAge () {
-    console.log('--- willAge ---')
+    // console.log('--- willAge ---')
     return this.age + 1
   }
 })
@@ -21,8 +21,12 @@ autorun(() => {
     console.log(appState.name)
   }, 0)
 })
-appState.willAge;
-appState.willAge;
+
+
+appState.age = 12;
+// appState.name = 'test'
+
+// appState.willAge;
 // appState.age += 1
 // // appState.age += 1
 // setTimeout(() => {

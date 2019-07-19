@@ -20,6 +20,10 @@ function reducerState(state = {stateDirty: false}, action) {
       return Object.assign({}, state, {
         stateDirty: typeof action.data === 'boolean' ? action.data : undefined
       })
+    case 'CHAGE_NAME':
+      return Object.assign({}, state, {
+        repetition: 'CHAGE_NAME'
+      })
     default:
       return Object.assign({}, state)
   }
