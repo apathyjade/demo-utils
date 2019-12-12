@@ -1,18 +1,18 @@
-import { Controller, Get, Header } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { AppService } from './app.service';
+import { MessagePattern } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 
 @Controller('/base')
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
+  getHello(): Observable<string> {
     return this.appService.getHello();
   }
   @Get('/ok')
-  @Header('a', 'b')
-  @Header('c', 'b')
-  getOk(): string {
-    return this.appService.getOk();
+  @MessagePattern({ cmd: 'sum' })
+  async getOk(data: string): Promise<string> {
+    return await this.appService.getOk(data);
   }
 }
